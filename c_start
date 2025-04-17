@@ -1,0 +1,93 @@
+#!/bin/bash
+
+# chatgpt generated 
+
+# compile and run the C code from within the Bash script
+
+# Create the C code as a heredoc and save it to a temporary file
+cat << 'EOF' > temp_program.c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_INPUT 100
+
+// Structure to hold the program's options
+typedef struct {
+    char action[MAX_INPUT];
+} Args;
+
+// Function to parse the command line arguments
+void parse_args(int argc, char *argv[], Args *args) {
+    if (argc < 3) {
+        printf("Usage: %s --action [look|alone]\n", argv[0]);
+        exit(1);
+    }
+    if (strcmp(argv[1], "--action") == 0) {
+        strcpy(args->action, argv[2]);
+    } else {
+        printf("Unknown option: %s\n", argv[1]);
+        exit(1);
+    }
+}
+
+// Print the 'tay' art and avatar list
+void print_tay_and_avatars() {
+    const char *tay = 
+        " _____\n"
+        "|_   _|_ _ _   _\n"
+        "  | |/ _t | | | |\n"
+        "  | | (_| | |_| |\n"
+        "  |_\\__o_\\__o |\n"
+        "           |___/\n";
+    const char *avatars =
+        "+--------------------------+------------------------+--------+\n"
+        "| Name                     | Invention              | Year   |\n"
+        "+--------------------------+------------------------+--------+\n"
+        "| Guglielmo Marconi        | Radio                  | 1895   |\n"
+        "| J. Bardeen, W. Shockley  | Transistor             | 1947   |\n"
+        "| John Harington           | Flush Toilet           | 1596   |\n"
+        "| Johannes Gutenberg       | Printing Press         | 1440   |\n"
+        "| James Watt               | Steam Engine (Improved)| 1765   |\n"
+        "| Alessandro Volta         | Electric Battery       | 1800   |\n"
+        "| Karl Benz                | Gasoline Car           | 1885   |\n"
+        "| Tim Berners-Lee          | World Wide Web         | 1989   |\n"
+        "| Alexander Graham Bell    | Telephone              | 1876   |\n"
+        "| Louis Pasteur            | Pasteurization         | 1864   |\n"
+        "| Cai Lun                  | Papermaking            | 105    |\n"
+        "+--------------------------+------------------------+--------+\n";
+
+    printf("%s\n%s", tay, avatars);
+}
+
+int main(int argc, char *argv[]) {
+    Args args;
+    parse_args(argc, argv, &args);
+
+    // Handle the action based on the argument passed
+    if (strcmp(args.action, "look") == 0) {
+        print_tay_and_avatars();
+    } else if (strcmp(args.action, "alone") == 0) {
+        print_tay_and_avatars();
+    } else {
+        printf("Invalid action. Use --action [look|alone]\n");
+    }
+
+    return 0;
+}
+EOF
+
+# Compile the C code
+gcc temp_program.c -o program
+
+# Check if compilation succeeded
+if [ $? -eq 0 ]; then
+    # Run the compiled C program
+    ./program "$@"
+    # Clean up
+    rm temp_program.c program
+else
+    echo "Compilation failed!"
+    rm temp_program.c
+    exit 1
+fi
