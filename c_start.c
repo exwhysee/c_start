@@ -1,8 +1,23 @@
+/* include lines tells the C preprocessor to
+   search for header files in predefined
+   locations, providing unction declarations */
+
+// standard C library nickname is std-lib
+
+// std-lib for printf, etc.
 #include <stdio.h>
+
+// std-lib for assigning memory, etc
 #include <stdlib.h>
+
+// std-lib for working with string/text
 #include <string.h>
 
+// macros are just find-and-replace text before
+// code compiles
 #define MAX_INPUT 100
+
+// chatgpt generated and edited using vim
 
 const char *avatars =
         "+--------------------------+------------------------+--------+\n"
@@ -29,7 +44,7 @@ const char *tay =
         "  |_\\__o_\\__o |\n"
         "           |___/\n";
 
-// chatgpt generated
+// chatgpt generated and edited using vim
 
 // Structure to hold the program's options
 typedef struct {
